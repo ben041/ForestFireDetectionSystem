@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Location{% endblock %}
+{% block content %}
+</header>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  LOCATIONS
+                </h2>
+                <div class="text-secondary mt-1">All Machine(Cameras) Locations Including the Webcam (Experimental Local Camera)</div>
+              </div>
+              <!-- Page title actions -->
+              <div class="col-auto ms-auto d-print-none">
+                <div class="d-flex">
+                  
+                  <a href="#" class="btn btn-primary">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                    Add Location
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-cards">
+              <div class="col-md-4 col-xl-3">
+                <a class="card card-link" href="{% url 'webcam' %}">
+                  <div class="card-cover card-cover-blurred text-center card-cover-blurred" style="background-image: url({{ location.pictures.url }}))">
+                    <span class="avatar avatar-xl avatar-thumb rounded" style="background-image: url({% static 'web-cam.jpg' %})"></span>
+                  </div>
+                  <div class="card-body text-center">
+                    <div class="card-title mb-1">Webcam</div>
+                    <div class="text-secondary">Experimental Pge for testing the Webcam</div>
+                  </div>
+                </a>
+              </div>
+              {% for location in locations %}
+              <div class="col-md-4 col-xl-3">
+                <a class="card card-link" href="{% url 'monitor' location.id %}">
+                  <div class="card-cover card-cover-blurred text-center card-cover-blurred" style="background-image: url({{ location.pictures.url }}))">
+                    <span class="avatar avatar-xl avatar-thumb rounded" style="background-image: url({{ location.pictures.url }})"></span>
+                  </div>
+                  <div class="card-body text-center">
+                    <div class="card-title mb-1">{{ location.name }}</div>
+                    <div class="text-secondary">{{ location.description }}</div>
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var video = document.getElementById("myVideo");
+  
+      function zoomIn() {
+          // Add logic for zooming in
+          console.log("Zoom In");
+      }
+  
+      function zoomOut() {
+          // Add logic for zooming out
+          console.log("Zoom Out");
+      }
+  
+      function capture() {
+          // Add logic for capturing
+          console.log("Capture");
+      }
+  
+      function togglePlayPause() {
+          if (video.paused || video.ended) {
+              video.play();
+          } else {
+              video.pause();
+          }
+      }
+  
+      function focusOnThing() {
+          // Add logic for focusing on a particular thing
+          console.log("Focus on Thing");
+      }
+  </script>
+
+    {% endblock %}

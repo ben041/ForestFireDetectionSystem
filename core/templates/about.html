@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About {% endblock %}
+{% block content %}
+      <div class="page-wrapper">
+        <div class="page-header">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                <h1 class="fw-bold"><img src="{% static 'logo.png' %}" width="220" height="128"><code>By</code> Andrew Mkwinja</h1>
+                <!-- <div class="my-2">
+                  A student at DMI St John Baptist University, Lilongwe Campus
+                </div> -->
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-3">
+              <div class="col">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <h2 class="card-title">About project</h2>
+                      <div>
+                        <p>This project presents a comprehensive overview and implementation of an intelligent fire detection system designed to provide early warnings and enhance safety in various environments. The system leverages advanced sensor technologies, including smoke and heat detectors, combined with cutting-edge image processing algorithms. The integration of machine learning techniques allows for real-time analysis of environmental conditions and rapid identification of potential fire incidents. The proposed system aims to minimize false alarms through intelligent decision-making and provides timely alerts to emergency response teams. Furthermore, the system architecture supports seamless integration with existing fire prevention and suppression systems. The implementation demonstrates promising results in terms of increased reliability, reduced response times, and improved overall fire safety in diverse settings.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-lg-4">
+                <div class="row row-cards">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="card-title">Basic info</div>
+                        <div class="mb-2">
+                          
+                          <strong>Went to: </strong>DMI St John the Baptist University, Lilongwe Campus
+                        </div>
+                        
+                        <div class="mb-2">
+                          <strong>Lives in: </strong>Lilongwe. A/49, Malawi
+                        </div>
+                        <div class="mb-2">
+                          <strong>Aim: </strong>Final Year Project
+                        </div>
+                        <div class="mb-2">
+                          <strong>Agenda: </strong>Forest Fire Detection System
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

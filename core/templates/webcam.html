@@ -1,0 +1,186 @@
+
+{% extends 'base.html' %}
+{% block title %}Monitor| {{ area.name }}{% endblock %}
+{% block content %}
+      <div class="page-wrapper">
+        <div class="page-header d-print-none">
+          <div class="container">
+            <div class="row g-3 align-items-center">
+              <div class="col-auto">
+                <span class="status-indicator status-green status-indicator-animated">
+                  <span class="status-indicator-circle"></span>
+                  <span class="status-indicator-circle"></span>
+                  <span class="status-indicator-circle"></span>
+                </span>
+              </div>
+              <div class="col">
+                <h2 class="page-title">
+                  WEBCAM:
+                    {% if error_message %}
+                        <span class="text-muted"> {{ error_message }}</span>
+                    {% else %}
+                        <span class="text-muted"> ({{ weather_info.city_name }})</span>
+                    {% endif %}
+                    
+                
+                </h2>
+                <div class="text-secondary">
+                  <ul class="list-inline list-inline-dots mb-0">
+                    <li class="list-inline-item"><span class="text-green">Live</span></li>
+                    <li class="list-inline-item">Testing Camera</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-auto ms-auto d-print-none">
+                <div class="btn-list">
+                  <a href="{% url 'location' %}" class="btn">
+                    Locations
+                  </a>
+                  <a href="{% url 'map' %}" class="btn btn-primary">
+                    Maps
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-cards">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="subheader">Temperature</div>
+                    <div class="h3 m-0">{{ weather_info.temp }}<sup>o</sup>C</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="subheader">Description</div>
+                    <div class="h3 m-0">{{ weather_info.description }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="subheader">Wind Speed</div>
+                    <div class="h3 m-0">{{ weather_info.wind }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="subheader">Humidity</div>
+                    <div class="h3 m-0">{{ weather_info.humidity }} </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="subheader">Sea Level</div>
+                    <div class="h3 m-0">{{ weather_info.sea_level }} m</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body p-0">
+                    <img src="{% url 'video_feed' %}" alt="Video Feed" style="width: 100%;">
+                  </div>
+                
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Min and Max TEMPERATURE <sup>For Next 3 hrs</sup></h3>
+                    <div id="chart-area"></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-area'), {
+      		chart: {
+      			type: "area",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: .16,
+      			type: 'solid'
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Maximum",
+      			data: [{{ weather_info.temp_max1 }}, {{ weather_info.temp_max2 }}, {{ weather_info.temp_max3 }}, {{ weather_info.temp_max4 }}, {{ weather_info.temp_max5 }}, {{ weather_info.temp_max6 }}]
+      		},{
+      			name: "Minimum",
+      			data: [{{ weather_info.temp_min1 }}, {{ weather_info.temp_min2 }}, {{ weather_info.temp_min3 }}, {{ weather_info.temp_min4 }}, {{ weather_info.temp_min5 }}, {{ weather_info.temp_min6 }}]
+      		}],
+      		tooltip: {
+      			theme: 'dark'
+      		},
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			categories: ['{{ weather_info.date1 }}', '{{ weather_info.date2 }}', '{{ weather_info.date3 }}', '{{ weather_info.date4 }}', '{{ weather_info.date5 }}', '{{ weather_info.date6 }}'],
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		colors: [tabler.getColor("primary"), tabler.getColor("pink")],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+  {% endblock %}
