@@ -5,6 +5,7 @@ from .models import Area
 import math
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -236,36 +237,47 @@ def monitor(request, pk):
 
 def signin(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
-
             login(request, user)
-            
+            messages.success(request, f'Welcome back, {username}!')
             return redirect('home')
         else:
-            error_message = 'Invalid username or password.'
-    else:
-        error_message = None
+            messages.error(request, 'Invalid username or password.')
 
-    return render(request, 'signin.html', {'error_message': error_message})
+    return render(request, 'signin.html')
 
 def signup(request):
     if request.method == 'POST':
-        # Retrive form data
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        # Create a new user
-        user = User.objects.create_user(username=username, email=email, password=password)
+        try:
+            # Check if username already exists
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username already exists.')
+                return render(request, 'signup.html')
+            
+            # Check if email already exists
+            if User.objects.filter(email=email).exists():
+                messages.error(request, 'Email already registered.')
+                return render(request, 'signup.html')
 
-        # Redirect to a success page
-        return redirect('home')
-    return render(request, 'signup.html') 
+            # Create a new user
+            user = User.objects.create_user(username=username, email=email, password=password)
+            messages.success(request, 'Account created successfully! Please sign in.')
+            return redirect('home')
+        except Exception as e:
+            messages.error(request, f'Error creating account: {str(e)}')
+            
+    return render(request, 'signup.html')
 
-def logout(request):
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'You have been logged out successfully.')
     return redirect('/')

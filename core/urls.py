@@ -7,10 +7,10 @@ from django.conf.urls.static import static
 from .experimentalview import *
 
 urlpatterns = [
-    path('', home, name="home" ),
+    path('home/', home, name="home" ),
     path('monitor/<int:pk>', monitor, name="monitor"),
     path('location/', location, name="location"),
-    path('signin/', signin, name="signin"),
+    path('', signin, name="signin"),
     path('logout/', logout, name='logout'),
     path('signup/', signup, name='signup'),
     path('about/', about, name='about'),
