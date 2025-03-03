@@ -28,7 +28,7 @@ The Fire Detection and Monitoring System is a Django-based web application that 
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/ben041/fire-detection-system.git
+    git clone https://github.com/ben041/ForestFireDetectionSystem.git
     cd fire-detection-system
     ```
 
