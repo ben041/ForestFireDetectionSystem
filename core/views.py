@@ -277,6 +277,9 @@ def signup(request):
             
     return render(request, 'signup.html')
 
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def logout_view(request):
     logout(request)
     messages.info(request, 'You have been logged out successfully.')
