@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>FFD| {% block title%}{% endblock %}</title>
+    <title>{% block title%}{% endblock %} - Forest Fire Detection System</title>
     <!-- Add this line to include FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wk9mGVs1a7FaplXFxBPYTK1xFX8KqF6xyOp7xu5sZlEiw0vVUoWS02eKcaC8kMxm" crossorigin="anonymous">
 
@@ -79,6 +79,14 @@
                     </span>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}" >
+                    <span class="nav-link-title">
+                      About
+                    </span>
+                  </a>
+                </li>
                 
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'location' %}" >
@@ -96,13 +104,6 @@
                   </a>
                 </li>
                 
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}" >
-                    <span class="nav-link-title">
-                      About
-                    </span>
-                  </a>
-                </li>
               </ul>
              
               <div class="navbar-nav flex-row order-md-last">

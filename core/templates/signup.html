@@ -13,7 +13,7 @@
             {% csrf_token %}
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-danger mb-3">{{ message }}</div>
+                    <div class="alert alert-info mb-3">{{ message }}</div>
                 {% endfor %}
             {% endif %}
             <div class="card-body">

@@ -12,19 +12,19 @@
               {% csrf_token %}
               {% if messages %}
                 {% for message in messages %}
-                  <div class="alert alert-danger mb-3">{{ message }}</div>
+                  <div class="alert alert-info mb-3">{{ message }}</div>
                 {% endfor %}
               {% endif %}
               <div class="mb-3">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-control" placeholder="Enter your username" autocomplete="off">
+                <input type="text" name="username" class="form-control" placeholder="Enter your username" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label class="form-label">
                   Password
                 </label>
                 <div class="input-group input-group-flat">
-                  <input type="password" class="form-control"  placeholder="Enter your password"  autocomplete="off">
+                  <input type="password" name="password" class="form-control"  placeholder="Enter your password"  autocomplete="off">
                 </div>
               </div>
               <div class="mb-2">
